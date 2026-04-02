@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Book Partner Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+
+    <!-- HEADER / NAVBAR -->
+    <div class="header">
+        <h2>Book Partner Portal</h2>
+        <form>
+            <button class="logout-btn">Logout</button>
+        </form>
+    </div>
+
+    <div class="dashboard-container">
+        <h3>Available Services</h3>
+
+        <div class="card-container">
+
+            <div class="card">
+                <div>
+                    <h4>Employees With Jobs</h4>
+                    <p>Comprehensive view of all employees and their respective job roles and departments.</p>
+                </div>
+                <a href="#"><button>Open Tool</button></a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h4>Employee search by publisher</h4>
+                    <p>Search employees and their job levels by entering publisher identifier.</p>
+                </div>
+                <a th:href="@{/employees-form}"><button>Open Search</button></a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h4>Inventory Overview</h4>
+                    <p>Monitor and manage book inventory levels across different partners.</p>
+                </div>
+                <a href="#"><button>Manage</button></a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h4>Reporting Tools</h4>
+                    <p>Generate detailed reports on partner performance and booking trends.</p>
+                </div>
+                <a href="#"><button>View Reports</button></a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h4>System Settings</h4>
+                    <p>Configure portal permissions and manage user account settings.</p>
+                </div>
+                <a href="#"><button>Settings</button></a>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

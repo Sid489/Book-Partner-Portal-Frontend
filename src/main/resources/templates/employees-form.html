@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Employees | Book Partner Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/SidAPI.css}">
+</head>
+
+<body>
+
+    <div class="header">
+        <h2>Book Partner Portal</h2>
+        <a href="/dashboard" style="text-decoration: none;">
+            <button class="logout-btn" style="color: var(--primary-color); border-color: var(--primary-color);">Back to
+                Dashboard</button>
+        </a>
+    </div>
+
+    <div class="form-container">
+
+        <div class="form-card">
+            <h2>Employee Search</h2>
+            <p class="subtitle">Search records by Publisher identifier</p>
+
+            <form action="/employees" method="get">
+
+                <input type="text" name="pubId" placeholder="Enter Publisher ID (e.g. 1234)" th:value="${param.pubId}"
+                    th:classappend="${error} ? 'input-error' : ''" required autocomplete="off">
+
+                <button type="submit">Search Records</button>
+
+            </form>
+
+            <!-- ERROR MESSAGE -->
+            <div th:if="${error}" class="error-box">
+                <span th:text="${error}"></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

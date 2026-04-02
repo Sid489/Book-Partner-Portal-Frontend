@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees | Book Partner Portal</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/SidAPI.css}">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <h2>Book Partner Portal</h2>
+        <a href="/employees-form" style="text-decoration: none;">
+            <button class="logout-btn" style="color: var(--primary-color); border-color: var(--primary-color);">
+                New Search
+            </button>
+        </a>
+    </div>
+
+    <!-- TABLE CONTAINER -->
+    <div class="table-container">
+
+        <div class="table-header">
+            <h2>
+                Employees for Publisher:
+                <span th:text="${data.pubName}" style="color: var(--primary-color);"></span>
+            </h2>
+        </div>
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>EMP ID</th>
+                    <th>FULL NAME</th>
+                    <th>JOB ID</th>
+                    <th>POSITION</th>
+                    <th>LEVEL</th>
+                    <th>MIN LEVEL</th>
+                    <th>MAX LEVEL</th>
+                    <th>HIRE DATE</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="emp : ${data.employees}">
+
+                    <!-- EMP ID -->
+                    <td th:text="${emp.empId}" style="font-weight: 500; color: var(--text-muted);"></td>
+
+                    <!-- FULL NAME (FIXED) -->
+                    <td style="font-weight: 600;"
+                        th:text="|${emp.firstName} ${emp.middleInitial != null ? emp.middleInitial : ''} ${emp.lastName}|">
+                    </td>
+
+                    <!-- JOB ID -->
+                    <td th:text="${emp.job != null ? emp.job.jobId : 'N/A'}"></td>
+
+                    <!-- JOB DESCRIPTION -->
+                    <td>
+                        <span class="badge" th:text="${emp.job != null ? emp.job.jobDesc : 'N/A'}">
+                        </span>
+                    </td>
+
+                    <!-- LEVEL -->
+                    <td th:text="${emp.jobLevel}"></td>
+
+                    <!-- MIN LEVEL -->
+                    <td th:text="${emp.job != null ? emp.job.minLvl : 'N/A'}"></td>
+
+                    <!-- MAX LEVEL -->
+                    <td th:text="${emp.job != null ? emp.job.maxLvl : 'N/A'}"></td>
+
+                    <!-- HIRE DATE (FORMATTED) -->
+                    <td style="color: var(--text-muted);" th:text="${#temporals.format(emp.hireDate, 'yyyy-MM-dd')}">
+                    </td>
+
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>
