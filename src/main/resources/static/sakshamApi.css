@@ -1,0 +1,72 @@
+.filter-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-form input {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    outline: none;
+    transition: var(--transition);
+}
+
+.filter-form input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.1);
+}
+
+.filter-form button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-form button:hover {
+    background: var(--primary-hover);
+}
+
+.book-name {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.price {
+    color: green;
+    font-weight: 600;
+}
+
+.main-author {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.co-author {
+    background-color: #e0e7ff;
+    color: #3730a3;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.royalty {
+    font-weight: 700;
+    color: #2b6cb0;
+}
+
+.row-item:hover {
+    transform: scale(1.01);
+    transition: 0.2s;
+}
