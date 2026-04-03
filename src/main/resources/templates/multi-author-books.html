@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Multi Author Books</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/jjsr.css">
+</head>
+<body class="bg-light">
+
+
+<div class="header">
+    <h2>Book Partner Portal</h2>
+    <a href="/dashboard" style="text-decoration: none;">
+        <button class="logout-btn"
+                style="color: var(--primary-color); border-color: var(--primary-color);">
+            Back to Dashboard
+        </button>
+    </a>
+</div>
+
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h5 class="card-title mb-3">Books with Multiple Authors</h5>
+
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                <tr>
+                    <th>Title ID</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Author Count</th>
+                    <th>Authors</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.titleId}"></td>
+                    <td th:text="${book.title}"></td>
+
+                    <!-- Badge -->
+                    <td>
+                        <span class="badge bg-primary" th:text="${book.type}"></span>
+                    </td>
+
+                    <td th:text="${book.authorCount}"></td>
+
+                    <td>
+                        <span class="badge bg-secondary"
+                              th:text="${#strings.listJoin(book.authorNames, ', ')}">
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <p th:if="${error}" th:text="${error}" class="text-danger"></p>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

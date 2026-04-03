@@ -72,4 +72,19 @@ public class ApiController {
 
         return "titles-under-price";
     }
+
+
+    @GetMapping("/multi-author-books")
+    public String getMultiAuthorBooks(Model model) {
+
+        try {
+            var data = apiService.getMultiAuthorBooks();
+            model.addAttribute("books", data);
+            return "multi-author-books";
+
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "employees-form";
+        }
+    }
 }
