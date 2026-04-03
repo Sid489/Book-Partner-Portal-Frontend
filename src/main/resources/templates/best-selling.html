@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Selling Books | Book Partner Portal</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/SidAPI.css}">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h2>Book Partner Portal</h2>
+    <a href="/dashboard" style="text-decoration: none;">
+        <button class="logout-btn"
+                style="color: var(--primary-color); border-color: var(--primary-color);">
+            Back to Dashboard
+        </button>
+    </a>
+</div>
+
+<!-- TABLE CONTAINER -->
+<div class="table-container">
+
+    <!-- TITLE -->
+    <div class="table-header">
+        <h2>Best Selling Books</h2>
+    </div>
+
+    <!-- TABLE -->
+    <table class="table">
+
+        <thead>
+        <tr>
+            <th>AUTHOR ID</th>
+            <th>AUTHOR NAME</th>
+            <th>TITLE ID</th>
+            <th>TITLE NAME</th>
+            <th>TOTAL SALES</th>
+            <th>REVENUE</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="book, iterStat : ${books}"
+            class="row-item"
+            th:style="${iterStat.index >= 5} ? 'display:none' : ''">
+
+            <td th:text="${book.authorId}"></td>
+            <td style="font-weight:600;" th:text="${book.authorName}"></td>
+            <td th:text="${book.titleId}"></td>
+            <td th:text="${book.titleName}"></td>
+            <td th:text="${book.totalSales}"></td>
+            <td style="color: green; font-weight:700;"
+                th:text="${#numbers.formatDecimal(book.revenue, 1, 2)}">
+            </td>
+
+        </tr>
+        </tbody>
+
+    </table>
+    <div style="text-align:center; margin-top:20px;">
+        <button onclick="toggleRows()" id="toggleBtn"
+                style="padding:10px 20px; border-radius:8px; cursor:pointer;">
+            Show More
+        </button>
+    </div>
+</div>
+<script>
+    let expanded = false;
+
+    function toggleRows() {
+        const rows = document.querySelectorAll(".row-item");
+        const btn = document.getElementById("toggleBtn");
+
+        rows.forEach((row, index) => {
+            if (index >= 5) {
+                row.style.display = expanded ? "none" : "";
+            }
+        });
+
+        expanded = !expanded;
+        btn.innerText = expanded ? "Show Less" : "Show More";
+    }
+</script>
+
+</body>
+
+</html>

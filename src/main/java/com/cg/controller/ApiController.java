@@ -1,9 +1,12 @@
 package com.cg.controller;
 
+import com.cg.dto.BestSellingBookDTO;
 import com.cg.service.ApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class ApiController {
@@ -33,5 +36,14 @@ public class ApiController {
             model.addAttribute("error", e.getMessage());
             return "employees-form"; // go back to form page
         }
+    }
+
+    @GetMapping("/best-selling")
+    public String getBestSellingBooks(Model model) {
+
+        List<BestSellingBookDTO> list = apiService.getBestSellingBooks();
+        model.addAttribute("books", list);
+
+        return "best-selling";
     }
 }
