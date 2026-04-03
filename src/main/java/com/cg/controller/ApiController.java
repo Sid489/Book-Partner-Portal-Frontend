@@ -1,9 +1,12 @@
 package com.cg.controller;
 
+import com.cg.dto.BestSellingBookDTO;
 import com.cg.service.ApiService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class ApiController {
@@ -35,7 +38,7 @@ public class ApiController {
         }
     }
 
-    @GetMapping("/ui/authors")
+    @GetMapping("/authors")
     public String showAuthors(Model model) {
         try {
             model.addAttribute("authors", apiService.getAuthorsWithBooksAndPublishers());
@@ -44,5 +47,12 @@ public class ApiController {
             model.addAttribute("error", e.getMessage());
             return "authors";
         }
+    @GetMapping("/best-selling")
+    public String getBestSellingBooks(Model model) {
+
+        List<BestSellingBookDTO> list = apiService.getBestSellingBooks();
+        model.addAttribute("books", list);
+
+        return "best-selling";
     }
 }

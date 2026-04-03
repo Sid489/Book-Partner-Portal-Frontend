@@ -50,3 +50,24 @@ public class ApiService {
         }
     }
 }
+    public List<BestSellingBookDTO> getBestSellingBooks() {
+
+        try {
+            return webClient.get()
+                    .uri("/api/authors/best-selling-books")
+                    .retrieve()
+                    .onStatus(
+                            status -> status.is4xxClientError() || status.is5xxServerError(),
+                            response -> response.bodyToMono(ErrorResponse.class)
+                                    .map(error -> new RuntimeException(error.getMessage()))
+                    )
+               
+                    .bodyToFlux(BestSellingBookDTO.class)
+                    .collectList()
+                    .block();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+}
