@@ -1,0 +1,138 @@
+/* DeependraApi.css - Premium distinct styling */
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: #faf8fc; /* Very light purple/gray tint */
+    color: #495057;
+    margin: 0;
+    padding: 40px 20px;
+}
+
+.page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(103, 65, 217, 0.08); /* Soft indigo shadow */
+    padding: 30px;
+    border: 1px solid #f3f0ff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f3f0ff;
+}
+
+.header h2 {
+    color: #5f3dc4; /* Deep Indigo Theme */
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #845ef7;
+    font-weight: 600;
+    background-color: #f3f0ff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #845ef7;
+    color: #ffffff;
+}
+
+/* Main Table Styling */
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.data-table thead th {
+    background-color: #f8f6ff;
+    color: #6741d9;
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e5dbff;
+}
+
+.data-table thead th:first-child {
+    border-top-left-radius: 8px;
+}
+.data-table thead th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.data-table > tbody > tr > td {
+    padding: 20px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.data-table > tbody > tr:hover > td {
+    background-color: #fcfbfa; /* subtle warm hover */
+}
+
+/* Typography Enhancements */
+.author-code {
+    font-family: monospace;
+    color: #adb5bd;
+    font-size: 14px;
+}
+
+.author-name {
+    font-weight: 600;
+    color: #212529;
+    font-size: 16px;
+}
+
+/* Redesigned UL/LI for Books (Pill/Card style) */
+.simple-book-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.simple-book-list li {
+    background-color: #ffffff;
+    border: 1px solid #e5dbff;
+    border-left: 4px solid #845ef7; /* left Indigo accent */
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #495057;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    min-width: 250px;
+    flex: 1;
+}
+
+.book-details {
+    color: #868e96;
+    font-size: 12px;
+    margin-top: 6px;
+    display: block;
+}
+
+.publisher-badge {
+    background-color: #fff4e6; /* light orange to contrast purple */
+    color: #d9480f;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 11px;
+}

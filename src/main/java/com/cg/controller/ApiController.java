@@ -38,6 +38,15 @@ public class ApiController {
         }
     }
 
+    @GetMapping("/authors")
+    public String showAuthors(Model model) {
+        try {
+            model.addAttribute("authors", apiService.getAuthorsWithBooksAndPublishers());
+            return "authors";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "authors";
+        }
     @GetMapping("/best-selling")
     public String getBestSellingBooks(Model model) {
 
