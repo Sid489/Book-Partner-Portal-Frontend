@@ -1,5 +1,6 @@
 package com.cg.controller;
 
+import com.cg.dto.AuthorTitlesUnderPriceDTO;
 import com.cg.dto.BestSellingBookDTO;
 import com.cg.service.ApiService;
 import org.springframework.stereotype.Controller;
@@ -56,5 +57,19 @@ public class ApiController {
         model.addAttribute("books", list);
 
         return "best-selling";
+    }
+
+
+    @GetMapping("/titles-under-price")
+    public String getTitlesUnderPrice(@RequestParam(required = false) Double maxPrice, Model model) {
+
+        try {
+            List<AuthorTitlesUnderPriceDTO> books = apiService.getTitlesUnderPrice(maxPrice);
+            model.addAttribute("books", books);
+        } catch (Exception ex) {
+            model.addAttribute("error", ex.getMessage());
+        }
+
+        return "titles-under-price";
     }
 }

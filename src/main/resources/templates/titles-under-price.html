@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Books Under Price</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/SidAPI.css}">
+    <link rel="stylesheet" th:href="@{/sakshamApi.css}">
+</head>
+
+<body>
+
+
+<div class="header">
+    <h2>Book Partner Portal</h2>
+    <a href="/dashboard">
+        <button class="logout-btn">Back to Dashboard</button>
+    </a>
+</div>
+
+<div class="table-container">
+
+    <div class="table-header">
+        <h2>Books Under Price</h2>
+    </div>
+
+    <form method="get" action="/titles-under-price" class="filter-form">
+        <input type="number" step="0.01" name="maxPrice"  placeholder="Enter maximum price..." required>
+        <button type="submit">Search</button>
+    </form>
+
+
+    <div th:if="${error}" class="error-box">
+        <span th:text="${error}"></span>
+    </div>
+
+
+    <table class="table" th:if="${books != null}">
+        <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Author</th>
+            <th>Author Role</th>
+            <th>Royalty</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="b : ${books}" class="row-item">
+
+            <td th:text="${b.titleId}"></td>
+
+            <td class="book-name" th:text="${b.bookTitle}"></td>
+
+            <td>
+                <span class="badge" th:text="${b.bookType}"></span>
+            </td>
+
+            <td class="price"
+                th:text="${#numbers.formatDecimal(b.price,1,2)}"></td>
+
+            <td th:text="${b.authorFullName}"></td>
+
+
+            <td>
+                <span th:if="${b.authorOrder == 1}" class="main-author">
+                    Main Author
+                </span>
+                <span th:if="${b.authorOrder > 1}" class="co-author">
+                    Co-Author
+                </span>
+            </td>
+
+            <td>
+                <span class="royalty"
+                      th:text="${b.royaltyPercent + '%'}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

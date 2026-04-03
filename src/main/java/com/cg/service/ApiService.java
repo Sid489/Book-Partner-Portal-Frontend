@@ -69,4 +69,27 @@ public class ApiService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+
+    public List<AuthorTitlesUnderPriceDTO> getTitlesUnderPrice(Double maxPrice) {
+        try {
+            return webClient.get()
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/api/titles/filter")
+                            .queryParam("maxPrice", maxPrice)
+                            .build())
+                    .retrieve()
+                    .onStatus(
+                            status -> status.is4xxClientError() || status.is5xxServerError(),
+                            response -> response.bodyToMono(ErrorResponse.class)
+                                    .map(error -> new RuntimeException(error.getMessage()))
+                    )
+                    .bodyToFlux(AuthorTitlesUnderPriceDTO.class)
+                    .collectList()
+                    .block();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }
