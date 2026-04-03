@@ -34,4 +34,15 @@ public class ApiController {
             return "employees-form"; // go back to form page
         }
     }
+
+    @GetMapping("/ui/authors")
+    public String showAuthors(Model model) {
+        try {
+            model.addAttribute("authors", apiService.getAuthorsWithBooksAndPublishers());
+            return "authors";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "authors";
+        }
+    }
 }

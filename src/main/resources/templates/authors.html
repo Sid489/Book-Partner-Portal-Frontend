@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors & Books List</title>
+    <!-- Linking your custom CSS -->
+    <link rel="stylesheet" th:href="@{/DeependraApi.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="header">
+        <h2>Authors and Books Portfolio</h2>
+        <a href="/dashboard" class="back-btn">← Back to Dashboard</a>
+    </div>
+    
+    <div class="error-msg" th:if="${error != null}">
+        <strong th:text="${error}"></strong>
+    </div>
+
+    <!-- Main Outer Table for Authors -->
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Author Code</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Associated Books & Publishers</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through the authors array sent from controller -->
+            <tr th:each="author : ${authors}">
+                
+                <td class="author-code" th:text="${author.authorId}"></td>
+                <td class="author-name" th:text="${author.authorFirstName}"></td>
+                <td class="author-name" th:text="${author.authorLastName}"></td>
+                
+                <td>
+                    <!-- Very Simple HTML List Layout -->
+                    <ul class="simple-book-list" th:if="${author.books != null and !author.books.empty}">
+                        <li th:each="book : ${author.books}">
+                            <strong><span th:text="${book.title}"></span></strong>
+                            <br>
+                            <span class="book-details">
+                                Book ID: <span th:text="${book.titleId}"></span> | 
+                                Publisher: <span class="publisher-badge" th:text="${book.publisherName} + ' (' + ${book.publisherId} + ')'"></span>
+                            </span>
+                        </li>
+                    </ul>
+                    
+                    <span class="empty-state" th:if="${author.books == null or author.books.empty}">No Books found for this author.</span>
+                </td>
+                
+            </tr>
+
+            <!-- Fallback if array is completely empty -->
+            <tr th:if="${authors == null or authors.empty}">
+                <td colspan="4" class="empty-state" style="text-align: center; padding: 30px;">
+                    No author data available. Make sure the backend server (8085) is running.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

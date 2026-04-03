@@ -3,7 +3,8 @@ package com.cg.service;
 import com.cg.dto.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.*;
-
+import org.springframework.core.ParameterizedTypeReference;
+import java.util.List;
 @Service
 public class ApiService {
 
@@ -29,6 +30,23 @@ public class ApiService {
 
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public List<AuthorBookPublisherDTO> getAuthorsWithBooksAndPublishers() {
+        try {
+            return webClient.get()
+                    .uri("/api/authors/books-with-publishers")
+                    .retrieve()
+                    .onStatus(
+                            status -> status.is4xxClientError() || status.is5xxServerError(),
+                            response -> response.bodyToMono(ErrorResponse.class)
+                                    .map(error -> new RuntimeException(error.getMessage()))
+                    )
+                    .bodyToMono(new ParameterizedTypeReference<List<AuthorBookPublisherDTO>>() {})
+                    .block();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch Authors data: " + e.getMessage());
         }
     }
 }
