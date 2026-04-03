@@ -92,4 +92,24 @@ public class ApiService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+
+    public List<MultiAuthorTitlesDTO> getMultiAuthorBooks() {
+
+        try {
+            return webClient.get()
+                    .uri("/api/titles/multi-author-titles") // backend API 9
+                    .retrieve()
+                    .onStatus(
+                            status -> status.is4xxClientError() || status.is5xxServerError(),
+                            response -> response.bodyToMono(ErrorResponse.class)
+                                    .map(error -> new RuntimeException(error.getMessage()))
+                    )
+                    .bodyToMono(new ParameterizedTypeReference<List<MultiAuthorTitlesDTO>>() {})
+                    .block();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }
