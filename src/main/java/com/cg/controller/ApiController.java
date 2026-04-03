@@ -47,6 +47,8 @@ public class ApiController {
             model.addAttribute("error", e.getMessage());
             return "authors";
         }
+    }
+    
     @GetMapping("/best-selling")
     public String getBestSellingBooks(Model model) {
 
