@@ -13,7 +13,6 @@
 
 <body>
 
-    <!-- HEADER -->
     <div class="header">
         <h2>Book Partner Portal</h2>
         <a href="/employees-form" style="text-decoration: none;">
@@ -22,8 +21,6 @@
             </button>
         </a>
     </div>
-
-    <!-- TABLE CONTAINER -->
     <div class="table-container">
 
         <div class="table-header">
@@ -50,34 +47,18 @@
 
             <tbody>
                 <tr th:each="emp : ${data.employees}">
-
-                    <!-- EMP ID -->
                     <td th:text="${emp.empId}" style="font-weight: 500; color: var(--text-muted);"></td>
-
-                    <!-- FULL NAME (FIXED) -->
                     <td style="font-weight: 600;"
                         th:text="|${emp.firstName} ${emp.middleInitial != null ? emp.middleInitial : ''} ${emp.lastName}|">
                     </td>
-
-                    <!-- JOB ID -->
                     <td th:text="${emp.job != null ? emp.job.jobId : 'N/A'}"></td>
-
-                    <!-- JOB DESCRIPTION -->
                     <td>
                         <span class="badge" th:text="${emp.job != null ? emp.job.jobDesc : 'N/A'}">
                         </span>
                     </td>
-
-                    <!-- LEVEL -->
                     <td th:text="${emp.jobLevel}"></td>
-
-                    <!-- MIN LEVEL -->
                     <td th:text="${emp.job != null ? emp.job.minLvl : 'N/A'}"></td>
-
-                    <!-- MAX LEVEL -->
                     <td th:text="${emp.job != null ? emp.job.maxLvl : 'N/A'}"></td>
-
-                    <!-- HIRE DATE (FORMATTED) -->
                     <td style="color: var(--text-muted);" th:text="${#temporals.format(emp.hireDate, 'yyyy-MM-dd')}">
                     </td>
 
